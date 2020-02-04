@@ -1,7 +1,9 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { UsersService } from '../users/users.service';
 import { User } from '../users/users.model';
+import { AuthDto } from './dto/auth.dto';
+import { CreateUserDto } from 'src/users/dto/create-user.dto';
 
 @Injectable()
 export class AuthService {
@@ -10,13 +12,24 @@ export class AuthService {
     private readonly jwtService: JwtService
   ) {}
 
-  async validateUser(username: string, password: string): Promise<any> {
-    const user = await this.usersService.findOne(username);
+  async validateUser({email, password}: AuthDto): Promise<any> {
+    const user = await this.usersService.findOne(email);
     if (user && user.password === password) {
       const { password, ...result } = user;
       return result;
     }
     return null;
+  }
+
+  async registerUser(user: CreateUserDto): Promise<User> {
+    const oldUser = await this.usersService.findOne(user.email);
+    if (oldUser) {
+      throw new HttpException({
+        status: HttpStatus.CONFLICT,
+        error: 'USER ALREADY EXISTS'
+      }, 409)
+    }
+    return this.usersService.create(user);
   }
 
   async signJwt(user: User) {
