@@ -18,7 +18,10 @@ export class AuthService {
       const { password, ...result } = user;
       return result;
     }
-    return null;
+    throw new HttpException({
+      status: HttpStatus.UNAUTHORIZED,
+      error: 'INVALID CREDENTIALS'
+    }, 401)
   }
 
   async registerUser(user: CreateUserDto): Promise<User> {
