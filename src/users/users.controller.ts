@@ -3,6 +3,7 @@ import { ApiTags, ApiOperation, ApiResponse, ApiBearerAuth } from '@nestjs/swagg
 import { UsersService } from './users.service';
 import { UserDto } from './dto/user.dto';
 import { AuthGuard } from '@nestjs/passport';
+
 @ApiTags('User')
 @ApiBearerAuth()
 @UseGuards(AuthGuard('jwt'))
