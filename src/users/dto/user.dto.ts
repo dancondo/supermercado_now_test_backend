@@ -10,20 +10,16 @@ export class UserDto {
   readonly email: string;
 
   @ApiProperty()
-  readonly password: string;
-
-  @ApiProperty()
   readonly firstName: string;
 
   @ApiProperty()
   readonly lastName: string;
 
-  constructor({ _id, email, password, firstName, lastName }: User) {
+  constructor({ _id, email, firstName, lastName }: User) {
     this.id = _id;
     this.email = email;
-    this.password = password;
-     this.firstName = firstName;
-     this.lastName = lastName;
+    this.firstName = firstName;
+    this.lastName = lastName;
   }
 
 }
