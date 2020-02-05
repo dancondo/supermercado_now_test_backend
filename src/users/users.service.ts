@@ -9,6 +9,10 @@ export class UsersService {
 
   constructor(@InjectModel('User') private readonly users: Model<User>) {}
 
+  async findAll(): Promise<Array<User>> {
+    return this.users.find().exec();
+  }
+
   async findOne(email: string): Promise<User | undefined> {
     return this.users.findOne({ email: email });
   }
