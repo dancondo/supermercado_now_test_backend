@@ -15,8 +15,7 @@ export class AuthService {
   async validateUser({email, password}: AuthDto): Promise<any> {
     const user = await this.usersService.findOne(email);
     if (user && user.password === password) {
-      const { password, ...result } = user;
-      return result;
+      return user;
     }
     throw new HttpException({
       status: HttpStatus.UNAUTHORIZED,
