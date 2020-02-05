@@ -14,6 +14,20 @@ export class UsersController {
   ) { }
 
   @ApiOperation({
+    description: 'Gets all users profile'    
+  })
+  @ApiResponse({
+    status: HttpStatus.OK,
+    description: 'Users profile dtos',
+    type: UserDto,
+    isArray: true
+  })
+  @Get()
+  public async index(): Promise<Array<UserDto>> {
+    return (await this.userService.findAll()).map(user => new UserDto(user));
+  }
+
+  @ApiOperation({
     description: 'Gets a user profile'    
   })
   @ApiResponse({
