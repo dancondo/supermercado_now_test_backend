@@ -7,4 +7,5 @@ export interface User extends Document {
   email: string,
   password: string,
   imageUrl?: string,
+  favorites: Array<string>
 }
