@@ -30,4 +30,14 @@ export class UsersService {
     return this.users.findOneAndUpdate({ _id: id }, user, { new: true });
   }
 
+  async updateFavorites(user: User, animeId): Promise<User> {
+    const favIndex = user.favorites.indexOf(animeId);
+    if (favIndex) {
+      user.favorites.splice(favIndex, 1)
+    } else {
+      user.favorites.push(animeId);
+    }
+    return this.users.findOneAndUpdate({ _id: user.id }, { favorites: user.favorites }, { new: true })
+  }
+
 }
