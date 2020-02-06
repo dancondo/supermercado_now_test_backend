@@ -15,11 +15,19 @@ export class UserDto {
   @ApiProperty()
   readonly lastName: string;
 
-  constructor({ _id, email, firstName, lastName }: User) {
+  @ApiProperty()
+  readonly imageUrl?: string;
+
+  @ApiProperty()
+  readonly password: string;
+
+  constructor({ _id, email, firstName, lastName, imageUrl, password }: User) {
     this.id = _id;
     this.email = email;
     this.firstName = firstName;
     this.lastName = lastName;
+    this.imageUrl = imageUrl;
+    this.password = password;
   }
 
 }
