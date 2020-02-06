@@ -44,9 +44,9 @@ export class AnimesController {
   @Put('/favorites')
   public async favorite(
     @Req() req: any,
-    @Body() animeId: string
+    @Body() body
   ) {
-    return await this.userService.updateFavorites(req.user, animeId);
+    return await this.userService.updateFavorites(req.user, body.animeId);
   }
 
 }

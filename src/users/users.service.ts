@@ -32,7 +32,7 @@ export class UsersService {
 
   async updateFavorites(user: User, animeId): Promise<User> {
     const favIndex = user.favorites.indexOf(animeId);
-    if (favIndex) {
+    if (favIndex > -1) {
       user.favorites.splice(favIndex, 1)
     } else {
       user.favorites.push(animeId);
