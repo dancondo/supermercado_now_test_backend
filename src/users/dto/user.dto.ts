@@ -21,13 +21,17 @@ export class UserDto {
   @ApiProperty()
   readonly password: string;
 
-  constructor({ _id, email, firstName, lastName, imageUrl, password }: User) {
+  @ApiProperty()
+  readonly favoritesCount: number;
+
+  constructor({ _id, email, firstName, lastName, imageUrl, password, favorites }: User) {
     this.id = _id;
     this.email = email;
     this.firstName = firstName;
     this.lastName = lastName;
     this.imageUrl = imageUrl;
     this.password = password;
+    this.favoritesCount = favorites ? favorites.length : 0
   }
 
 }
